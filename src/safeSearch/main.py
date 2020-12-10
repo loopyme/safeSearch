@@ -7,7 +7,7 @@ from safeSearch.query import (
 )
 
 
-def search(word: str, sites: Union[List, Dict] = None, multi_page: bool = True):
+def search(word: str, sites: Union[List, Dict] = None, max_page: int = 1):
     """Split site filter conditions, query separately, then merge results
     to avoid long queries"""
 
@@ -20,9 +20,8 @@ def search(word: str, sites: Union[List, Dict] = None, multi_page: bool = True):
         try:
             print(f"Querying({i}/{len(query_words)})")
             res.append(query(query_words[i]))
-            if multi_page:
-                for j in range(1, min(res[-1]["total"], 3)):
-                    res.append(query(query_words[i], pn=j))
+            for j in range(1, min(res[-1]["total"], max_page)):
+                res.append(query(query_words[i], pn=j))
 
         except Exception as _:
             pass

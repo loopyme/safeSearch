@@ -1,5 +1,5 @@
 import re
-from time import time, sleep
+from time import time
 from typing import List, Dict, Union, Iterator
 
 import yaml
@@ -95,11 +95,11 @@ def query(word: str, **kwargs) -> Dict:
     except ParseError as _:
         return {"results": {}}
     print(word, kwargs)
-    if time() < LAST_QUERY_TIME + 3:
-        LAST_QUERY_TIME = time()
-        sleep(3)
-    else:
-        LAST_QUERY_TIME = time()
+    # if time() < LAST_QUERY_TIME + 3:
+    #     LAST_QUERY_TIME = time()
+    #     sleep(3)
+    # else:
+    #     LAST_QUERY_TIME = time()
     return result
 
 
@@ -107,9 +107,11 @@ def date_to_num(date: str) -> int:
     """In order to sort, make 2019年12月31日 -> 20191231"""
     try:
         if "天" in date:  # n天前
-            num = 2222222222 - int(date[0]) * 100
+            num = 2222222222 - int(date[0]) * 10000
         elif "小时" in date:  # n小时前
-            num = 2222222222 - int(date[:-3])
+            num = 2222222222 - int(date[:-3]) * 100
+        elif "分钟" in date:  # n分钟
+            num = 2222222222 - int(date[:-2])
         else:
             num = int("".join(map(lambda x: x.zfill(2), re.split(r"年|月|日", date))))
     except Exception as _:

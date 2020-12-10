@@ -13,6 +13,9 @@ def format_by_time(result):
         elif "天" in r["time"]:
             year = "一周内"
             r["date"] = r["time"]
+        elif "分钟" in r["time"]:
+            year = "一小时内"
+            r["date"] = r["time"]
         else:
             year = r["time"][:4]
             r["date"] = r["time"][5:]

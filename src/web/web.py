@@ -15,10 +15,12 @@ def index():
     sites = {}
     sites.update(all_sites["china_gov"])
     sites.update(all_sites["china_media"])
+
     wd = request.args.get("search")
+    pn = request.args.get("pn")
     if wd:
         return render_template(
-            "result.html", all_result=format_by_time(search(wd, sites))
+            "result.html", all_result=format_by_time(search(wd, sites, pn))
         )
     else:
         return render_template("search.html", sites=sites)
