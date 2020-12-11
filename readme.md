@@ -7,9 +7,7 @@
 ## 使用
 
  - 在线使用: [http://search.loopy.tech](http://search.loopy.tech)
- - 本地使用：
-     - 命令行使用：先下载，直接运行`main.py`
-     - 浏览器使用：先下载，pip安装`flask`等一些依赖，然后运行`web.py`
+ - 本地使用：先下载，使用`python setup.py install`安装，然后直接运行`web.py`（浏览器使用）或`main.py`（命令行使用）
  - 高阶使用：注释得比较清晰，读注释自己接函数进来就可以了。同时，你可以修改`sites.yaml`来自定义网站群组（**目前只支持了中国的官方媒体**）
  
  ![screenshot.png](./screenshot.png)
